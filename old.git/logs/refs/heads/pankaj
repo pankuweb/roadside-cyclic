@@ -1,0 +1,5 @@
+0000000000000000000000000000000000000000 b57f19666ae9998131f9ba43af35c9d9da95afce Pankaj Kumar <pankajittechxpert@gmail.com> 1665761312 +0530	branch: Created from master
+b57f19666ae9998131f9ba43af35c9d9da95afce f568effc094213e65923301b98dd05d8c9e92d55 Pankaj Kumar <pankajittechxpert@gmail.com> 1665761423 +0530	commit: Checklist functionality integrated
+f568effc094213e65923301b98dd05d8c9e92d55 e060717c14a6d210e2ac43ea6e626943e224fd6a Pankaj Kumar <pankajittechxpert@gmail.com> 1665828057 +0530	commit: Fixed issue in empty checlist controller
+e060717c14a6d210e2ac43ea6e626943e224fd6a 8a8b82b94e0a167b68e79dd8423d78efdc4ae92f Pankaj Kumar <pankajittechxpert@gmail.com> 1665895804 +0530	commit: Fixed checklist id null
+8a8b82b94e0a167b68e79dd8423d78efdc4ae92f d32644435ecb435c7f1ae1166997a8715981029b Pankaj Kumar <pankajittechxpert@gmail.com> 1669782453 +0530	commit: Changed the firebase and stripe keys
