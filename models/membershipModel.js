@@ -23,6 +23,9 @@ const membershipSchema = new mongoose.Schema(
     price: {
       type: Number,
     },
+    additionalDrivers: {
+      type: Number,
+    },
     vehicleLimit: {
       type: Number,
     },

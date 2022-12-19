@@ -14,6 +14,8 @@ const passport = require("passport");
 const serviceRouter = require("./routes/serviceRoutes");
 const userRouter = require("./routes/userRoutes");
 const fleetRouter = require("./routes/fleetRoutes");
+const vehicleRouter = require("./routes/vehicleRoutes");
+const rentVehicleRouter = require("./routes/rentVehicleRoutes");
 const orderRouter = require("./routes/orderRoutes");
 const membershipRouter = require("./routes/membershipRoutes");
 const contact = require("./routes/contactRoutes");
@@ -24,6 +26,7 @@ const notificationsRoutes = require("./routes/notificationRoutes");
 const checkListItemtRoutes = require("./routes/checkListItemRoutes");
 const checkListCatageroyRoutes = require("./routes/checkListCatageroyRoutes");
 const checkListRoutes = require("./routes/checkListRoutes");
+const chargesHistoryRouter = require("./routes/chargesHistoryRoutes");
 
 const app = express();
 
@@ -94,6 +97,7 @@ app.use(express.json());
 app.use("/api/v1/services", serviceRouter);
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/fleets", fleetRouter);
+app.use("/api/v1/vehicles", vehicleRouter);
 app.use("/api/v1/order", orderRouter);
 app.use("/api/v1/membership", membershipRouter);
 app.use("/api/v1/contact", contact);
@@ -104,6 +108,8 @@ app.use("/api/v1/notifications", notificationsRoutes);
 app.use("/api/v1/checkListItem", checkListItemtRoutes);
 app.use("/api/v1/checkListCat", checkListCatageroyRoutes);
 app.use("/api/v1/checkList", checkListRoutes);
+app.use("/api/v1/rentableVehicles", rentVehicleRouter);
+app.use("/api/v1/chargesHistory", chargesHistoryRouter);
 
 app.all("*", (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));

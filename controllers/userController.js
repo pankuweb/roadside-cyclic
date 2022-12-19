@@ -7,6 +7,8 @@ const Notification = require("../models/notificationModel");
 const Fleet = require("../models/fleetModel");
 const Membership = require("../models/membershipModel");
 const Order = require("../models/orderModel");
+const jwt = require("jsonwebtoken");
+const sendEmail = require("./../utils/email");
 
 // -----------------
 // -----------------
@@ -570,3 +572,67 @@ exports.addToken = catchAsync(async (req, res, next) => {
     },
   });
 });
+
+// -----------------
+// -----------------
+//Dependant Functionality
+// --------------------
+
+// Get all dependants ----
+// -----------------------
+exports.getAllDependants = catchAsync(async (req, res) => {
+  const users = await User.find({ parent_user_id: req.params.id }).sort({
+    $natural: -1,
+  });
+
+  res.status(200).json({
+    message: "success",
+    message: "Users fetched successfully!",
+    results: users.length,
+    data: {
+      users: users,
+    },
+  });
+});
+
+// Share URL
+exports.shareLink = async (req, res, next) => {
+  // 1) Get user based on POSTed email
+  const user = await User.findOne({ email: req.body.email });
+
+  if (!user) {
+    return res
+      .status(400)
+      .json({ error: true, message: "User does not exist" });
+  }
+
+  const userEmail = req.body.email;
+  const appURL = req.body.link;
+
+  // 2) Generate the random reset token
+  await user.save({ validateBeforeSave: false });
+  // 3) Send it to user's email
+
+  const message = `Congratulations your account as dependant in roadside response is created. Now you can install app using: ${appURL}.`;
+  const token = jwt.sign(
+    { UserId: user._id, type: "installapkurl" },
+    process.env.JWT_SECRET
+  );
+  try {
+    await sendEmail({
+      email: user.email,
+      subject: "Roadside Response",
+      message,
+    });
+
+    res.status(200).json({
+      status: "success",
+      message: "URL sent to email!",
+    });
+  } catch (err) {
+    return res.status(500).json({
+      error: true,
+      message: "There was an error sending the email. Try again later!",
+    });
+  }
+};

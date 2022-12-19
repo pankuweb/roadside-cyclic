@@ -6,7 +6,7 @@ const sendEmail = async (options) => {
     service: "gmail",
     auth: {
       user: "pankajittechxpert@gmail.com",
-      pass: "PHP$work!@#",
+      pass: "rrtmdpcwcfjdiaqa",
     },
   });
 

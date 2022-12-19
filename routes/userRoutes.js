@@ -23,6 +23,7 @@ router.post("/verifyOTP", authController.otpvalidation);
 
 router.post("/staff/sendOTP", authController.sendLogninOTP);
 router.post("/staff/verifyOTP", authController.verifyLoginOTP);
+router.post("/shareLink", userController.shareLink);
 
 router
   .route("/")
@@ -49,4 +50,6 @@ router
   .patch(userController.updateUser)
   .delete(userController.deleteUser);
 
+// Dependant
+router.route("/getAllDependants/:id").get(userController.getAllDependants);
 module.exports = router;

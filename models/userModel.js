@@ -24,6 +24,16 @@ const userSchema = new mongoose.Schema(
     staff_device_token: {
       type: String,
     },
+    parent_user_id: {
+      type: String,
+    },
+    relation: {
+      type: String,
+    },
+    parent_user: {
+      type: mongoose.Schema.ObjectId,
+      ref: "User",
+    },
     email: {
       type: String,
       unique: [true],
@@ -218,6 +228,21 @@ const userSchema = new mongoose.Schema(
   },
   { versionKey: false }
 );
+userSchema.pre(/^find/, function (next) {
+  this.populate({
+    path: "parent_user",
+    select: [
+      "firstName",
+      "lastName",
+      "email",
+      "status",
+      "phone",
+      "customer_status",
+      "createdAt",
+    ],
+  });
+  next();
+});
 
 userSchema.pre("save", async function (next) {
   // Only run this function if password was actually modified
